@@ -13,7 +13,8 @@ All reviews MUST align with Effect official documentation (https://effect.websit
 
 ### A. 에러 처리
 
-- `throw new Error(...)` 또는 bare `throw` → `Data.TaggedError` 사용 필수
+- Effect 경계를 벗어나는 `throw new Error(...)` → `Data.TaggedError` 사용 필수
+  - 허용: `Effect.tryPromise` 콜백 내부의 throw (자동으로 에러 채널로 매핑됨, 예: `defaultFetcher.ts`)
 - Effect 코드 주변의 `try { ... } catch` → `Effect.catchTag`/`catchAll`/`catchTags`/`either` 사용 필수
   - 주의: 비-Effect 코드(`fileToBase64.ts` 등)의 try-catch는 허용됨. Effect 파이프라인 내부만 검사
 - 에러를 조용히 무시하는 패턴 → 반드시 명시적 처리 또는 타입 시스템 통한 전파
@@ -30,7 +31,8 @@ All reviews MUST align with Effect official documentation (https://effect.websit
 ### C. Effect.gen 사용
 
 - 단일 `yield*` Effect.gen → `flatMap`/`map`/`andThen`으로 간소화
-- `function*` + `yield*` 사용 확인 (`yield` 아님, adapter `_` 패턴은 deprecated)
+- `function*` + `yield*` 사용 확인 (`yield` 아님)
+  - 참고: AGENTS.md에 `function* (_)` adapter 패턴이 문서화되어 있으나, 실제 코드베이스는 모두 adapter 없는 `function* ()` 사용. 새 코드는 adapter 없는 패턴 권장
 
 ### D. 의존성 주입 (테스트 코드 대상)
 

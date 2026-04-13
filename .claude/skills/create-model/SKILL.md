@@ -19,7 +19,7 @@ Effect Schema(https://effect.website/docs/schema/introduction/) 원칙에 따라
 
 | type | 유효 도메인 |
 |------|-----------|
-| base | messages, kakao, naver, rcs |
+| base | messages, kakao, kakao/bms, naver, rcs |
 | request | common, iam, kakao, messages, voice |
 | response | iam, kakao (또는 responses/ 루트에 직접 배치) |
 
