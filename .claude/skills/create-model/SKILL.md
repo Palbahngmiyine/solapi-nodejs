@@ -19,7 +19,9 @@ Effect Schema(https://effect.website/docs/schema/introduction/) 원칙에 따라
 
 | type | 유효 도메인 |
 |------|-----------|
-| base | messages, kakao, kakao/bms, naver, rcs |
+| base | messages, kakao, kakao/bms*, naver, rcs |
+
+\* **kakao/bms 주의**: BMS 모델은 스키마 파일 + barrel export 외에 `src/models/base/kakao/kakaoOption.ts`의 `bmsChatBubbleTypeSchema`, `baseBmsSchema`, `BMS_REQUIRED_FIELDS`에도 통합이 필요합니다.
 | request | common, iam, kakao, messages, voice |
 | response | iam, kakao (또는 responses/ 루트에 직접 배치) |
 
