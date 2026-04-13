@@ -1,7 +1,7 @@
 ---
 name: effect-reviewer
 description: Effect 공식문서 원칙에 기반한 코드 리뷰 에이전트. 타입 안전 에러 처리, 의존성 주입, Schema 패턴 준수를 검증.
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, Bash
 model: inherit
 ---
 
@@ -14,7 +14,8 @@ All reviews MUST align with Effect official documentation (https://effect.websit
 ### A. 에러 처리
 
 - `throw new Error(...)` 또는 bare `throw` → `Data.TaggedError` 사용 필수
-- `try { ... } catch` → `Effect.catchTag`/`catchAll`/`catchTags`/`either` 사용 필수
+- Effect 코드 주변의 `try { ... } catch` → `Effect.catchTag`/`catchAll`/`catchTags`/`either` 사용 필수
+  - 주의: 비-Effect 코드(`fileToBase64.ts` 등)의 try-catch는 허용됨. Effect 파이프라인 내부만 검사
 - 에러를 조용히 무시하는 패턴 → 반드시 명시적 처리 또는 타입 시스템 통한 전파
 - `Effect.gen` 내부에서 throw 가능한 함수 호출 시:
   - `JSON.parse`, `Schema.decodeUnknownSync` 등 → `Effect.try`로 래핑 필수

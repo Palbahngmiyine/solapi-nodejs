@@ -75,8 +75,10 @@ it.effect('should handle <에러 상황> gracefully', () =>
     );
 
     expect(result._tag).toBe('Left');
-    // Effect.tryPromise 에러: result.left는 UnknownException, 원본은 result.left.error
-    // 직접 Effect 에러: result.left가 TaggedError 자체
+    if (result._tag === 'Left') {
+      // Effect.tryPromise는 UnknownException으로 래핑 — .error로 원본 에러 접근
+      expect(String(result.left.error)).toContain('예상되는 에러 메시지');
+    }
   }).pipe(Effect.provide(<ServiceName>Live)),
 );
 ```
