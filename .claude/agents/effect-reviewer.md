@@ -32,11 +32,11 @@ All reviews MUST align with Effect official documentation (https://effect.websit
 - 단일 `yield*` Effect.gen → `flatMap`/`map`/`andThen`으로 간소화
 - `function*` + `yield*` 사용 확인 (`yield` 아님, adapter `_` 패턴은 deprecated)
 
-### D. 의존성 주입
+### D. 의존성 주입 (테스트 코드 대상)
 
-- 서비스 접근: `yield* ServiceTag` 패턴 (Effect.gen 내부에서만 유효)
-- Layer 합성: `Layer.mergeAll` / `Layer.provide`
-- Requirements 타입이 모든 의존성을 union으로 추적하는지 확인
+- `yield* ServiceTag` / `Layer.provide` 패턴은 `test/` 코드에서만 사용
+- `src/services/`의 프로덕션 서비스는 class 기반(`DefaultService` 상속) — DI 규칙 적용 대상 아님
+- 테스트에서 Requirements 타입이 모든 의존성을 union으로 추적하는지 확인
 
 ## Review Process
 

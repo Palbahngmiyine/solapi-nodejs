@@ -12,7 +12,20 @@ Effect Schema(https://effect.website/docs/schema/introduction/) 원칙에 따라
 ## Usage
 
 ```
-/create-model <ModelName> [--type base|request|response] [--domain messages|kakao|naver|rcs|common|voice|iam]
+/create-model <ModelName> [--type base|request|response] [--domain <domain>]
+```
+
+### 타입별 유효 도메인
+
+| type | 유효 도메인 |
+|------|-----------|
+| base | messages, kakao, naver, rcs |
+| request | common, iam, kakao, messages, voice |
+| response | iam, kakao (또는 responses/ 루트에 직접 배치) |
+
+```
+# 예시
+/create-model VoiceOption --type request --domain voice
 ```
 
 ## Step 1: 기존 패턴 확인
