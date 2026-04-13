@@ -12,7 +12,7 @@ Effect Schema(https://effect.website/docs/schema/introduction/) 원칙에 따라
 ## Usage
 
 ```
-/create-model <ModelName> [--type base|request|response] [--domain messages|kakao|iam|cash|storage]
+/create-model <ModelName> [--type base|request|response] [--domain messages|kakao|naver|rcs|common|voice|iam]
 ```
 
 ## Step 1: 기존 패턴 확인

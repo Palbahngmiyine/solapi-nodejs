@@ -84,11 +84,11 @@ it.effect('should handle <에러 상황> gracefully', () =>
 ### 병렬 호출
 
 ```typescript
-// Effect.all은 기본 순차 실행. 병렬은 {concurrency: "unbounded"} 옵션 필요
+// Effect.all은 기본 순차 실행. 병렬 실행 시 concurrency 옵션 필수
 const [r1, r2] = yield* Effect.all([
   Effect.tryPromise(() => service.method1()),
   Effect.tryPromise(() => service.method2()),
-]);
+], {concurrency: 'unbounded'});
 ```
 
 ### 환경변수
@@ -105,6 +105,9 @@ const sender = yield* Config.string('SOLAPI_SENDER').pipe(
 CLAUDE.md "Mandatory Validation" 순서대로 `pnpm lint` → `pnpm test` → `pnpm build` 실행.
 
 ## Checklist
+
+기존 plain vitest 테스트를 확장하는 경우, 해당 파일의 기존 패턴을 따릅니다.
+새로 작성하는 Effect 패턴 테스트의 경우:
 
 - [ ] `@effect/vitest`에서 import (`vitest` 아님)
 - [ ] `it.effect()` + `Effect.gen(function* () { ... })`
