@@ -34,6 +34,7 @@ src/index.ts                    ← 최상위 entry point
    - `src/models/responses/` 파일 → `src/models/responses/index.ts` → `src/models/index.ts`
    - `src/models/base/kakao/bms/` 파일 → `bms/index.ts` → `src/models/index.ts`
    - `src/types/` 파일 → `src/types/index.ts`에서 직접 re-export
+   - `src/errors/` 파일 → `src/index.ts`에서 직접 re-export (errors/index.ts 없음)
 4. re-export 체인이 `src/index.ts`까지 연결되는지 확인
 
 **중요**: 실제 barrel 구조를 먼저 읽어서 확인하세요. 중간 index.ts가 없는 디렉토리의 파일은 상위 barrel에서 직접 re-export됩니다.

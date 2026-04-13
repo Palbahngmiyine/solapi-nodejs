@@ -14,7 +14,7 @@ All reviews MUST align with Effect official documentation (https://effect.websit
 ### A. 에러 처리
 
 - Effect 경계를 벗어나는 `throw new Error(...)` → `Data.TaggedError` 사용 필수
-  - 허용: `Effect.tryPromise` 콜백 내부의 throw (자동으로 에러 채널로 매핑됨, 예: `defaultFetcher.ts`)
+  - `Effect.tryPromise` 콜백 내부 throw는 `catch` 옵션으로 타입 에러 매핑 시에만 허용 (예: `defaultFetcher.ts`의 `catch` → `DefaultError`). `catch` 없으면 `UnknownException`이 되어 타입 안전성 상실
 - Effect 코드 주변의 `try { ... } catch` → `Effect.catchTag`/`catchAll`/`catchTags`/`either` 사용 필수
   - 주의: 비-Effect 코드(`fileToBase64.ts` 등)의 try-catch는 허용됨. Effect 파이프라인 내부만 검사
 - 에러를 조용히 무시하는 패턴 → 반드시 명시적 처리 또는 타입 시스템 통한 전파
