@@ -261,7 +261,8 @@ jobs:
       - name: Publish
         env:
           NPM_TAG: ${{ github.ref_name == 'beta' && 'beta' || 'latest' }}
-        run: npm publish --tag "$NPM_TAG"
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public --tag "$NPM_TAG"
 
       - name: Report publish failure
         if: failure()
